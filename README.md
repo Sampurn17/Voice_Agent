@@ -1,102 +1,233 @@
-# 🤖 Vapi Personal Assistant Voice Agent
+# 🎓 IIIT Una Voice Assistant — Vapi + RAG
 
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)]()
-[![Maintainer](https://img.shields.io/static/v1?label=Yevhen%20Ruban&message=Maintainer&color=red)](mailto:yevhen.ruban@extrawest.com)
-[![Ask Me Anything !](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)]()
-[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-![GitHub release](https://img.shields.io/badge/release-v1.0.0-blue)
+A conversational voice agent for **IIIT Una** that answers questions about fees, academics, hostels, campus facilities, placements, and more — powered by [Vapi AI](https://vapi.ai), **Cohere embeddings**, and **Pinecone** vector search.
 
-A FastAPI-based backend service for a personal assistant voice agent integrated with Vapi AI. 
-This project demonstrates how to build a structured API that handles todo lists, reminders, and calendar events through voice commands processed by AI.
+Built on FastAPI with a clean-architecture backend that also manages todos, reminders, calendar events, and outbound calls.
 
+---
 
+## ✨ Features
 
+| Category | What it does |
+|---|---|
+| **🔍 RAG Knowledge Base** | Retrieves institute-specific context (fee structure, hostel rules, campus info, curricula) from Pinecone using Cohere `embed-english-v3.0` embeddings |
+| **🎙️ Vapi Webhook** | Handles Vapi `tool-calls` and `apiRequest` payloads, returning RAG-retrieved answers in real-time during voice calls |
+| **📝 Todo Management** | Create, list, complete, and delete todos via voice or API |
+| **⏰ Reminders** | Set reminders with importance levels |
+| **📅 Calendar Events** | Schedule events with start/end times |
+| **📞 Outbound Calls** | Trigger calls to phone numbers via the Vapi telephony API |
+| **🗄️ SQLite Persistence** | Todos, reminders, and events stored locally via SQLAlchemy ORM |
 
-https://github.com/user-attachments/assets/56214fbe-6429-4d97-9695-ecccc34d0a71
+---
 
+## 🏗️ Architecture
 
-### Phone call demo
+```
+vapi_personal_assistant_voice_agent/
+├── data/                          # Institute knowledge base (source documents)
+│   ├── academics/                 # Curriculum PDFs (CSE, ECE)
+│   ├── administration/            # Fee structure, campus info
+│   └── hostels/                   # Hostel rules & regulations
+├── src/
+│   ├── api/
+│   │   ├── dependencies.py        # DI: DB sessions, Vapi request validation
+│   │   └── routes/
+│   │       ├── todo.py            # CRUD endpoints for todos
+│   │       ├── reminder.py        # CRUD endpoints for reminders
+│   │       ├── calendar_event.py  # CRUD endpoints for calendar events
+│   │       ├── call.py            # Outbound call initiation via Vapi API
+│   │       └── vapi_webhook.py    # POST /vapi/webhook — handles RAG tool calls
+│   ├── config/
+│   │   └── settings.py            # Pydantic settings (reads .env)
+│   ├── models/
+│   │   ├── base.py                # SQLAlchemy engine & session factory
+│   │   ├── database.py            # Table creation on startup
+│   │   ├── domain/                # Pydantic request/response schemas
+│   │   └── entities/              # SQLAlchemy ORM models
+│   ├── repositories/              # Data access layer (generic CRUD)
+│   ├── services/                  # Business logic (todo, reminder, call, calendar)
+│   ├── scripts/
+│   │   ├── ingest_iiit_una.py     # Seed hardcoded IIIT Una knowledge chunks
+│   │   └── ingest_real_files.py   # Ingest PDFs & text files from data/
+│   ├── tools/
+│   │   └── rag.py                 # Cohere embed → Pinecone query → context retrieval
+│   └── utils/
+│       └── helpers.py             # JSON parsing & error handling utilities
+├── ingest.py                      # Quick-start: create Pinecone index + seed sample docs
+├── test_webhook.py                # Smoke test for the /vapi/webhook endpoint
+├── requirements.txt
+├── .env.example
+└── .gitignore
+```
 
+### How the RAG Pipeline Works
 
+```
+User speaks a question via Vapi voice call
+        │
+        ▼
+Vapi sends a tool-call webhook to POST /vapi/webhook
+        │
+        ▼
+vapi_webhook.py extracts the query & department
+        │
+        ▼
+rag.py embeds the query with Cohere (embed-english-v3.0)
+        │
+        ▼
+Pinecone returns the top-3 most relevant document chunks
+        │
+        ▼
+Context is returned to Vapi → assistant speaks the answer
+```
 
-
-https://github.com/user-attachments/assets/5859b32b-7c49-487b-84c7-7647eb0d860a
-
-
-
-
-## 🌟 Features
-
-- **📝 Todo Management**: Create, list, complete, and delete todo items
-- **⏰ Reminders**: Set and manage reminders with importance levels
-- **📅 Calendar**: Schedule and track events with start and end times
-- **📞 Call Initiation**: Trigger outbound calls via Vapi AI API
-- **🔄 Vapi AI Integration**: Process natural language commands into structured API calls
-- **🔧 Clean Architecture**: Follows best practices with proper separation of concerns
+---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
 - Python 3.9+
-- Pip package manager
-- Vapi AI account and API key (for call functionality)
+- A [Cohere](https://dashboard.cohere.com/api-keys) API key
+- A [Pinecone](https://app.pinecone.io) API key
+- A [Vapi](https://vapi.ai) account (for voice call features)
+- A tunneling tool like [ngrok](https://ngrok.com) to expose `localhost` to Vapi
 
-### Installation
+### 1. Clone & Install
 
-1. Clone the repository:
 ```bash
-git clone https://github.com/extrawest/vapi_personal_assistant_voice_agent.git
-cd vapi_personal_assistant_voice_agent
-```
-
-2. Install dependencies:
-```bash
+git clone https://github.com/Sampurn17/Voice_Agent.git
+cd Voice_Agent
 pip install -r requirements.txt
 ```
 
-3. Set up environment variables:
+### 2. Configure Environment Variables
+
 ```bash
-# Copy the example environment file
-cp src/.env.example .env
-
-# Edit the .env file with your Vapi API key
-# Replace 'your_vapi_api_key_here' with your actual API key
+cp .env.example .env
 ```
 
-4. Run the application:
+Edit `.env` with your actual keys:
+
+```env
+COHERE_API_KEY=your_cohere_api_key_here
+PINECONE_API_KEY=your_pinecone_api_key_here
+```
+
+### 3. Seed the Knowledge Base
+
+**Option A — Quick start with sample data:**
+
 ```bash
-uvicorn src.main:app --reload
+python ingest.py
 ```
 
-5. Access the API documentation:
+This creates the `institute-knowledge-base` Pinecone index and upserts 3 sample document chunks.
+
+**Option B — Ingest real files from `data/`:**
+
+```bash
+python -m src.scripts.ingest_real_files
 ```
-http://localhost:8000/docs
+
+Reads all `.txt`, `.md`, and `.pdf` files from `data/`, chunks them with LangChain's `RecursiveCharacterTextSplitter`, embeds via Cohere, and upserts to Pinecone.
+
+**Option C — Ingest hardcoded IIIT Una knowledge:**
+
+```bash
+python -m src.scripts.ingest_iiit_una
 ```
 
-## 🔌 Vapi AI Integration
+Seeds structured knowledge about academics, ECE labs, administration, campus facilities, and the placement cell.
 
-This service is designed to work with Vapi AI's voice assistant platform. The integration enables:
+### 4. Run the Server
 
-1. **Natural Language Processing**: Convert voice commands to structured API calls
-2. **Context Awareness**: Maintain conversation context for follow-up commands
-3. **Tool-Based Execution**: Execute specific functions based on user intent
-4. **Outbound Calls**: Initiate calls to customers using Vapi's telephony infrastructure
+```bash
+uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload
+```
 
-### Example Voice Commands
+### 5. Expose to Vapi
 
-- "Add a new todo to buy groceries"
-- "Remind me to call mom tomorrow at 5 PM"
-- "Schedule a meeting with the team on Friday from 2 to 3 PM"
-- "Call customer John at +1-202-555-0123"
+```bash
+ngrok http 8000
+```
+
+Copy the HTTPS URL and set it as the **Server URL** or **API Request URL** in your Vapi assistant's tool configuration, pointing to:
+
+```
+https://<your-ngrok-url>/vapi/webhook
+```
+
+### 6. Test Locally
+
+```bash
+python test_webhook.py
+```
+
+Or visit the auto-generated docs at [http://localhost:8000/docs](http://localhost:8000/docs).
+
+---
+
+## 📚 Knowledge Base Content
+
+The `data/` directory contains real IIIT Una institutional data:
+
+| File | Content |
+|---|---|
+| `administration/fee_structure.txt` | Complete semester-wise fee breakdown, payment modes, scholarships, refund policy |
+| `administration/campus_info.txt` | Location, administrative blocks, contact info, anti-ragging policy |
+| `hostels/hostel_rules.txt` | Gate timings, mess rules, electrical appliance policy, disciplinary actions |
+| `academics/*.pdf` | CSE and ECE curriculum documents |
+
+---
+
+## 🔌 API Endpoints
+
+### Vapi Webhook
+
+| Method | Path | Description |
+|---|---|---|
+| `POST` | `/vapi/webhook` | Handles Vapi `tool-calls` and direct `apiRequest` payloads |
+
+### Personal Assistant CRUD
+
+| Method | Path | Description |
+|---|---|---|
+| `POST` | `/todos/` | Create a todo |
+| `GET` | `/todos/` | List all todos |
+| `POST` | `/reminders/` | Create a reminder |
+| `GET` | `/reminders/` | List all reminders |
+| `POST` | `/calendar-events/` | Create a calendar event |
+| `GET` | `/calendar-events/` | List all events |
+| `POST` | `/calls/` | Initiate an outbound call via Vapi |
+
+---
 
 ## 🛠️ Tech Stack
 
-- **FastAPI**: Modern, fast web framework for building APIs
-- **SQLAlchemy**: SQL toolkit and ORM for database operations
-- **Pydantic**: Data validation and settings management
-- **Uvicorn**: ASGI server for running the application
-- **SQLite**: Lightweight disk-based database
-- **Requests**: HTTP library for making API calls to Vapi
+| Technology | Purpose |
+|---|---|
+| **FastAPI** | Async web framework & auto-generated OpenAPI docs |
+| **Cohere** | Text embedding (`embed-english-v3.0`, 1024-dim) |
+| **Pinecone** | Serverless vector database for semantic search |
+| **SQLAlchemy** | ORM for local SQLite persistence |
+| **Pydantic** | Request/response validation & settings management |
+| **LangChain** | Document loading (PDF, TXT) and text chunking |
+| **Vapi AI** | Voice assistant platform with telephony integration |
+| **Uvicorn** | ASGI server |
 
-Developed by [extrawest](https://extrawest.com/). Software development company
+---
+
+## 📂 Environment Variables
+
+| Variable | Required | Description |
+|---|---|---|
+| `COHERE_API_KEY` | ✅ | Cohere API key for generating embeddings |
+| `PINECONE_API_KEY` | ✅ | Pinecone API key for vector storage & search |
+| `VAPI_API_KEY` | Optional | Only needed for outbound call functionality |
+
+---
+
+## 📄 License
+
+This project is licensed under the [Apache License 2.0](LICENSE).
