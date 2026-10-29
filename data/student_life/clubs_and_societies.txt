@@ -1,0 +1,100 @@
+Student Activity Centre (SAC) & Clubs – IIIT Una
+==================================================
+
+Source: IIIT Una Student Activity Council Policy and Official Website
+Prepared: 30 October 2026
+Purpose: Initial text source for the IIIT Una Voice Assistant RAG knowledge base.
+
+Student Activity Centre (SAC) Overview:
+The IIIT Una Student Activity Centre (SAC) is described in the Student Activity Council Policy as the central hub for extracurricular and co-curricular activities.
+Its aims include:
+- Encouraging participation across academic programmes and backgrounds.
+- Promoting technical, sports, cultural and artistic pursuits.
+- Nurturing leadership and innovation.
+- Creating a multicultural campus environment.
+SAC is responsible for organizing inter-IIIT events at IIIT Una.
+
+SAC Structure – Four Societies:
+The Student Activity Council Policy groups activities into four societies:
+1. Technical Society (TS)
+2. Sports and Recreational Society (SRS)
+3. Literary and Cultural Society (LCS)
+4. Student Social Responsibility Society (SSRS)
+
+The policy states that each society comprises clubs and that the number of clubs may change. Societies should publish an event calendar and budget at the start of each academic year, subject to approval.
+
+
+1. Technical Society (TS)
+--------------------------
+Clubs/Cells under Technical Society:
+- AAVESH
+- ARES
+- ASTRAL
+- EIC
+- FORCE
+- GDSE
+
+Activities of Technical Society:
+- Prototype and model development.
+- Software and computer-based activities.
+- Hackathons and coding competitions.
+- Technical festivals.
+- Seminars.
+- Induction into technical activities.
+- Professional student chapters.
+- Inter-institute competitions.
+
+
+2. Sports and Recreational Society (SRS)
+-----------------------------------------
+Clubs listed under SRS in policy:
+- ZENITH
+- TRAVISTA
+
+Responsibilities of SRS:
+- Encouraging students to participate in sports of their choice.
+- Administering day-to-day sports activities.
+- Organizing the Annual Sports Meet.
+- Conducting inter-hostel and inter-department tournaments each semester.
+- Organizing inter-IIIT sports meets and other inter-institutional activities.
+- Administering participation in national-level sports competitions.
+- Organizing sports activities for freshers.
+- Arranging sports seminars, workshops and training camps.
+
+Note on Travista: The policy's grouping is reproduced as written. The official Travista club page describes Travista as the Travel and Tourism Club. Do not assume that all club names or society assignments shown in the policy are necessarily the current operational arrangement; verify against the current club pages.
+
+
+3. Literary and Cultural Society (LCS)
+---------------------------------------
+Clubs listed under LCS in policy:
+- EPMOC
+- PICXCEL
+- SARGAM
+- EUNOIA
+
+Activities of LCS:
+- Creative writing, poetry, drama, dance, arts and crafts, sculpture, painting, photography, quizzes, student magazines, workshops, competitions, induction activities, institute-day events, cultural celebrations, and the annual three-day MRIDANG festival.
+
+
+4. Student Social Responsibility Society (SSRS)
+------------------------------------------------
+Clubs listed under SSRS in policy:
+- ECOVA
+
+Functions of SSRS:
+- Promoting awareness of sustainable development goals, environmental sustainability, and community responsibility.
+- Organizing awareness campaigns, training, Swachh Bharat-themed contests, and outreach activities.
+
+
+Individual Club Pages Found on Official Website:
+- Sargam: Music and Dance Club. Its page describes activities around music, dance, creative expression, and workshops.
+- ECOVA: Described as IIIT Una's official environmental club, focused on environmental awareness and action.
+- Travista: Described as the Travel and Tourism Club, intended to create travel experiences and promote awareness of campus culture and activities.
+- EPMOC: Event Planning, Management & Organising Council. Its page describes involvement in cultural events, including Mridang, and event planning and execution.
+
+
+Voice-Assistant Response Guidance:
+- When asked about SAC or clubs/societies, summarize the four societies (TS, SRS, LCS, SSRS) and their respective domains.
+- Mention specific clubs (e.g., Sargam for music/dance, ECOVA for environment, Travista for travel/tourism, EPMOC for event planning, AAVESH/FORCE/GDSE for tech).
+- Note that Travista is classified under SRS in the Council Policy but operates as the Travel and Tourism Club on the official website.
+- Keep club structure, sports facilities, and current event schedules as distinct types of information.

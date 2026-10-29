@@ -111,6 +111,8 @@ venv.bak/
 sentence_index/
 merging_index/
 *.pdf
+!data/**/*.pdf
+!data/*.pdf
 *.db
 *.sqlite
 *.sqlite3

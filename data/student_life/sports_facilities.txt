@@ -1,0 +1,60 @@
+Sports Facilities – IIIT Una
+==============================
+
+Source: IIIT Una Annual Progress Report 2023–24 and Student Activity Council Policy
+Prepared: 30 October 2026
+Purpose: Initial text source for the IIIT Una Voice Assistant RAG knowledge base.
+
+Sports Grounds and Facilities (from Annual Progress Report 2023–24):
+The IIIT Una Annual Progress Report 2023–24 lists the following sports facilities:
+- Cricket ground.
+- Basketball ground.
+- Football ground.
+- Athletic track.
+- Volleyball ground.
+- Lawn tennis.
+- Multiple badminton grounds.
+- Indoor sports room in each hostel.
+
+Additional Fitness and Recreation Facilities:
+The report describes:
+- A dedicated music room.
+- A well-equipped gymnasium for physical fitness.
+
+Historical Reporting Note:
+These sports and fitness details come from the 2023–24 Annual Progress Report and should be treated as historical institutional reporting until confirmed against current operational information.
+
+Sports Training and Staff:
+The report states that the institute has dedicated sports staff to train students in sports activities and facilitates student participation in inter-institutional sports events.
+
+Sports and Recreational Society (SRS):
+The Student Activity Council Policy describes the Sports and Recreational Society (SRS) as promoting physical fitness, recreation, teamwork, leadership, and community among students, faculty, and staff.
+Its stated responsibilities include:
+- Encouraging students to participate in sports of their choice.
+- Administering day-to-day sports activities.
+- Organizing the Annual Sports Meet.
+- Conducting inter-hostel and inter-department tournaments each semester.
+- Organizing inter-IIIT sports meets and other inter-institutional activities.
+- Administering participation in national-level sports competitions.
+- Organizing sports activities for freshers.
+- Arranging sports seminars, workshops, and training camps.
+
+Clubs under SRS:
+The policy lists ZENITH and TRAVISTA under SRS. The official Travista club page describes Travista as the Travel and Tourism Club. Treat the policy's club grouping as a policy statement, and verify the current club directory before describing current organization structure.
+
+Sports Events:
+The SAC Policy refers to:
+- Annual Sports Meet.
+- Inter-hostel and inter-department tournaments.
+- Inter-IIIT sports meets.
+- National-level sports participation.
+Note: These are described as society responsibilities; this document does not establish the date, registration procedure, current schedule, venue availability, or results of any particular event.
+
+Current Availability and Timings:
+The sources used for this document do not establish current opening hours, booking procedures, equipment availability, coaching schedules, gym access rules, fees, or restrictions for each facility. Do not invent these details. Refer users to current institute notices or the relevant institute staff when the information is not present in the knowledge base.
+
+VOICE-ASSISTANT RESPONSE GUIDANCE:
+- If asked which facilities are listed in the annual report, provide the list above and mention that the report is from 2023–24.
+- If asked about sports activities, summarize the SRS responsibilities described in the policy.
+- If asked whether a facility is open now, how to book a court, or when coaching happens, answer only if a current official source confirms it; otherwise advise checking with institute staff or current notices.
+- Keep sports facilities, club structure, and current event schedules as distinct types of information.

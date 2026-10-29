@@ -1,0 +1,43 @@
+Hostel Facilities – IIIT Una
+==============================
+
+Source: Official IIIT Una website and institute admission brochure
+Prepared: 30 October 2026
+Purpose: Initial text source for the IIIT Una Voice Assistant RAG knowledge base.
+
+Institute Hostel Facilities:
+An official IIIT Una admission brochure states that the institute has three hostels with accommodation capacity of around 800 students. The brochure lists the following facilities:
+- Wi-Fi internet facility.
+- CCTV system.
+- Round-the-clock dedicated security personnel and hostel attendants.
+- Fire-safety provisions and disability-friendly infrastructure.
+- Indoor stadium.
+- Dedicated laundry rooms.
+- Mess facility with a modern kitchen.
+- Multipurpose common hall.
+
+Institute Guest House:
+The brochure also describes an institute guest house with the following amenities:
+- Well-equipped rooms.
+- 24x7 Wi-Fi.
+- Centralized air conditioning.
+- CCTV surveillance.
+- Round-the-clock guest-house staff and security.
+- Provisions for people with disabilities.
+
+Hostel Fees and Allocation:
+The official institute website publishes hostel fee-payment notices for particular student batches and semesters. The website also lists hostel allocation information and a Hostel Management System (HMS). Fee amounts and payment instructions can change by batch and semester; retrieve the latest applicable official notice before answering a fee question.
+
+The institute website has published notices titled "Hostel Fee Payment Notice" for specific B.Tech and M.Tech batches and semesters. A 2026 postgraduate admissions page also listed a hostel fee payment process and a notice about a live demonstration of the HMS portal for hostel allocation.
+
+Curfews and Timings:
+- Hostel timing for girls: 10:00 PM.
+- College in-timing: 9:30 PM for everyone.
+- Hostel gates close at 10:00 PM during weekdays and 11:00 PM on weekends.
+- Students must be present in the hostel during roll call, which is conducted at 10:30 PM by the hostel warden.
+- Night-outs require prior written permission from the Warden. Only two night-outs per month are permitted, and a parent/guardian must authorize the request.
+
+Voice-Assistant Response Guidance:
+- If asked about curfews and timings, state clearly: College in-timing is 9:30 PM for everyone, and hostel timing for girls is 10:00 PM. Weekday hostel gate closing is 10:00 PM and weekend is 11:00 PM.
+- If asked about hostel fees or hostel allocation, explain that fees vary by batch and semester and instruct the student to refer to the latest official Hostel Fee Payment Notice or check the Hostel Management System (HMS) portal.
+- If asked about guest house facilities, list the amenities (well-equipped rooms, 24x7 Wi-Fi, centralized AC, CCTV, round-the-clock staff and security, disability access).
