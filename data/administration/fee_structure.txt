@@ -1,0 +1,75 @@
+Fee Structure – IIIT Una (Academic Year 2026-27)
+=================================================
+
+B.Tech Program Fee (Per Semester):
+
+1. Tuition Fee:
+   - General / OBC Category: INR 1,30,000 per semester
+   - SC / ST Category: Full tuition fee waiver (as per GoI norms)
+   - EWS Category: Subject to verification, partial/full waiver may apply
+
+2. Other Fees (applicable to all categories):
+   - Development Fee: INR 10,000 per semester
+   - Examination Fee: INR 2,500 per semester
+   - Student Activity Fee: INR 1,500 per semester
+   - Internet and IT Infrastructure Fee: INR 3,000 per semester
+   - Library Fee: INR 2,000 per semester
+   - Medical Insurance Premium: INR 1,000 per year (charged in odd semesters)
+
+3. Hostel and Mess Charges:
+   - Hostel Room Rent: INR 12,000 per semester
+   - Hostel Maintenance and Electricity: INR 8,000 per semester
+   - Hostel Amenities Fee: INR 3,000 per semester
+   - Mess Fee (estimated): INR 22,000 per semester (subject to mess committee review)
+   - Mess Caution Deposit: INR 5,000 (one-time, refundable at the time of leaving)
+   ** Total Hostel Fee (excluding mess): INR 23,000 per semester
+   ** Total Hostel + Mess Fee: INR 45,000 per semester
+
+4. One-Time Fees (at the time of admission):
+   - Admission Fee: INR 5,000 (non-refundable)
+   - Caution Money Deposit: INR 10,000 (refundable on leaving the institute)
+   - Alumni Association Fee: INR 1,000 (one-time)
+
+Payment Mode:
+- All fees must be paid through SBI Collect portal before the start of each semester.
+- Fee receipts must be submitted to the Accounts section for verification.
+- Late payment attracts a penalty of INR 100 per day for the first 15 days, and INR 500 per day thereafter.
+
+Scholarships and Financial Aid:
+- Merit-cum-Means Scholarship: Available for students with family income below INR 8,00,000 per annum. Students must apply through the Dean (Student Affairs) office.
+- AICTE Pragati Scholarship: For girl students in technical education.
+- Institute Merit Scholarship: Top 10% students in each branch based on SGPA may receive a tuition fee waiver for the subsequent semester.
+
+Fee Refund Policy (in case of withdrawal):
+- Before the start of classes: Full refund minus INR 1,000 processing fee
+- Within 15 days of classes: 80% refund of tuition fee
+- Between 15–30 days: 50% refund of tuition fee
+- After 30 days: No refund
+
+Fee Calculation Summary (Per Semester – General/OBC, Hosteler):
+=================================================================
+
+  Component                          | Per Semester  | Per Year (2 Sems)
+  ------------------------------------|---------------|------------------
+  Tuition Fee                         | INR 1,30,000  | INR 2,60,000
+  Development Fee                     | INR 10,000    | INR 20,000
+  Examination Fee                     | INR 2,500     | INR 5,000
+  Student Activity Fee                | INR 1,500     | INR 3,000
+  Internet & IT Infrastructure Fee    | INR 3,000     | INR 6,000
+  Library Fee                         | INR 2,000     | INR 4,000
+  Medical Insurance (per year)        | INR 1,000     | INR 1,000
+  ------------------------------------|---------------|------------------
+  Subtotal (Academic Fees)            | INR 1,50,000  | INR 2,99,000
+  ------------------------------------|---------------|------------------
+  Hostel Room Rent                    | INR 12,000    | INR 24,000
+  Hostel Maintenance & Electricity    | INR 8,000     | INR 16,000
+  Hostel Amenities Fee                | INR 3,000     | INR 6,000
+  Mess Fee                            | INR 22,000    | INR 44,000
+  ------------------------------------|---------------|------------------
+  Subtotal (Hostel + Mess)            | INR 45,000    | INR 90,000
+  ------------------------------------|---------------|------------------
+  GRAND TOTAL (Per Semester)          | INR 1,95,000  |
+  GRAND TOTAL (Per Year)              |               | INR 3,89,000
+  ------------------------------------|---------------|------------------
+
+Note: One-time fees (Admission Fee INR 5,000 + Caution Deposit INR 10,000 + Alumni Fee INR 1,000 + Mess Caution INR 5,000 = INR 21,000) are payable only at the time of admission and are NOT included in the above recurring totals.

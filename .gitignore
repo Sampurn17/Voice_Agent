@@ -114,4 +114,9 @@ merging_index/
 *.db
 *.sqlite
 *.sqlite3
-*.db-journal 
+*.db-journal
+
+# Tunneling tools & local scripts
+ngrok.exe
+ngrok
+pinggy.bat
