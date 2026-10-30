@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IIIT Una Voice Assistant</title>
+  <meta name="description" content="AI-powered voice assistant for IIIT Una — ask about academics, events, hostel, placements and more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0c14;
+      --surface: rgba(255,255,255,0.04);
+      --border: rgba(255,255,255,0.08);
+      --accent: #6c63ff;
+      --accent-2: #a78bfa;
+      --accent-glow: rgba(108,99,255,0.35);
+      --text: #e8eaf0;
+      --muted: #8b8fa8;
+      --danger: #f87171;
+      --success: #34d399;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Ambient background orbs */
+    body::before {
+      content: '';
+      position: fixed;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(108,99,255,0.15) 0%, transparent 70%);
+      top: -150px; left: -150px;
+      pointer-events: none;
+      animation: orb1 12s ease-in-out infinite alternate;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(167,139,250,0.10) 0%, transparent 70%);
+      bottom: -100px; right: -100px;
+      pointer-events: none;
+      animation: orb2 15s ease-in-out infinite alternate;
+    }
+    @keyframes orb1 { from { transform: translate(0,0) scale(1); } to { transform: translate(60px,40px) scale(1.1); } }
+    @keyframes orb2 { from { transform: translate(0,0) scale(1); } to { transform: translate(-40px,-50px) scale(1.15); } }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-radius: 28px;
+      padding: 48px 40px 40px;
+      width: min(480px, 94vw);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+      box-shadow: 0 0 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04);
+      position: relative;
+      z-index: 1;
+    }
+
+    .header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      text-align: center;
+    }
+    .badge {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-2);
+      font-weight: 600;
+      background: rgba(108,99,255,0.12);
+      border: 1px solid rgba(108,99,255,0.25);
+      border-radius: 20px;
+      padding: 4px 14px;
+    }
+    .header h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #fff 30%, var(--accent-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .header p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* Waveform / orb visualiser */
+    .orb-wrap {
+      position: relative;
+      width: 140px; height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .orb-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1.5px solid rgba(108,99,255,0.35);
+      animation: ring-pulse 2.4s ease-in-out infinite;
+    }
+    .orb-ring:nth-child(1) { width: 140px; height: 140px; animation-delay: 0s; }
+    .orb-ring:nth-child(2) { width: 110px; height: 110px; animation-delay: 0.4s; }
+    .orb-ring:nth-child(3) { width: 80px;  height: 80px;  animation-delay: 0.8s; }
+    @keyframes ring-pulse {
+      0%,100% { opacity: 0.15; transform: scale(1); }
+      50%      { opacity: 0.55; transform: scale(1.04); }
+    }
+    .orb-core {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 32px var(--accent-glow), 0 0 8px rgba(167,139,250,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .orb-core svg { width: 28px; height: 28px; color: #fff; }
+
+    /* Active state */
+    .orb-wrap.active .orb-core {
+      animation: orb-active 0.8s ease-in-out infinite alternate;
+    }
+    .orb-wrap.active .orb-ring { animation-duration: 1s; }
+    @keyframes orb-active {
+      from { transform: scale(1);   box-shadow: 0 0 32px var(--accent-glow); }
+      to   { transform: scale(1.12); box-shadow: 0 0 60px var(--accent-glow), 0 0 20px rgba(167,139,250,0.5); }
+    }
+
+    /* Waveform bars shown during active call */
+    .waveform {
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 3px;
+      height: 28px;
+    }
+    .waveform.visible { display: flex; }
+    .waveform span {
+      width: 3px;
+      border-radius: 2px;
+      background: linear-gradient(to top, var(--accent), var(--accent-2));
+      animation: wave 1.2s ease-in-out infinite;
+    }
+    .waveform span:nth-child(1) { height: 40%; animation-delay: 0.0s; }
+    .waveform span:nth-child(2) { height: 70%; animation-delay: 0.1s; }
+    .waveform span:nth-child(3) { height: 100%;animation-delay: 0.2s; }
+    .waveform span:nth-child(4) { height: 55%; animation-delay: 0.3s; }
+    .waveform span:nth-child(5) { height: 80%; animation-delay: 0.15s; }
+    .waveform span:nth-child(6) { height: 45%; animation-delay: 0.25s; }
+    .waveform span:nth-child(7) { height: 65%; animation-delay: 0.05s; }
+    @keyframes wave {
+      0%,100% { transform: scaleY(1); }
+      50%      { transform: scaleY(0.3); }
+    }
+
+    /* Status label */
+    .status-label {
+      font-size: 0.82rem;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+      min-height: 18px;
+      transition: color 0.3s;
+    }
+    .status-label.active  { color: var(--success); }
+    .status-label.error   { color: var(--danger); }
+
+    /* Action buttons */
+    .actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+    }
+
+    .btn-call {
+      width: 100%;
+      padding: 15px 24px;
+      border-radius: 14px;
+      border: none;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    #btn-start {
+      background: linear-gradient(135deg, var(--accent), #8b5cf6);
+      color: #fff;
+      box-shadow: 0 4px 20px var(--accent-glow);
+    }
+    #btn-start:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px var(--accent-glow);
+    }
+    #btn-start:active:not(:disabled) { transform: translateY(0); }
+    #btn-start:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none;
+    }
+    #btn-end {
+      background: rgba(248,113,113,0.12);
+      color: var(--danger);
+      border: 1px solid rgba(248,113,113,0.25);
+      display: none;
+    }
+    #btn-end.visible {
+      display: flex;
+    }
+    #btn-end:hover {
+      background: rgba(248,113,113,0.22);
+      box-shadow: 0 4px 16px rgba(248,113,113,0.2);
+    }
+
+    /* Transcript area */
+    .transcript-wrap {
+      width: 100%;
+      background: rgba(0,0,0,0.25);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      min-height: 80px;
+      max-height: 180px;
+      overflow-y: auto;
+      display: none;
+    }
+    .transcript-wrap.visible { display: block; }
+    .transcript-wrap p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.7;
+      white-space: pre-wrap;
+    }
+    .transcript-wrap::-webkit-scrollbar { width: 4px; }
+    .transcript-wrap::-webkit-scrollbar-track { background: transparent; }
+    .transcript-wrap::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+    .footer-note {
+      font-size: 0.75rem;
+      color: rgba(139,143,168,0.6);
+      text-align: center;
+    }
+
+    .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--success);
+      display: inline-block;
+      animation: blink 1.4s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.25} }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="header">
+      <span class="badge">IIIT Una · AI Assistant</span>
+      <h1>Voice Assistant</h1>
+      <p>Ask about academics, hostels, events,<br/>placements, and campus life.</p>
+    </div>
+
+    <div class="orb-wrap" id="orb-wrap">
+      <div class="orb-ring"></div>
+      <div class="orb-ring"></div>
+      <div class="orb-ring"></div>
+      <div class="orb-core">
+        <!-- Mic icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+          <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+          <line x1="12" y1="19" x2="12" y2="23"/>
+          <line x1="8" y1="23" x2="16" y2="23"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="waveform" id="waveform">
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <p class="status-label" id="status-label">Ready to connect</p>
+
+    <div class="actions">
+      <button class="btn-call" id="btn-start">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9A16 16 0 0 0 15 16.09l1.09-1.09a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+        Start Call
+      </button>
+      <button class="btn-call" id="btn-end">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+        End Call
+      </button>
+    </div>
+
+    <div class="transcript-wrap" id="transcript-wrap">
+      <p id="transcript-text"></p>
+    </div>
+
+    <p class="footer-note">Powered by Vapi AI &nbsp;·&nbsp; IIIT Una</p>
+  </div>
+
+  <!-- Vapi Web SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@vapi-ai/web@latest/dist/vapi.umd.js"></script>
+  <script>
+    const VAPI_PUBLIC_KEY  = "6312a3cb-a31c-481d-8158-560330dce11f";
+    const VAPI_ASSISTANT_ID = "537437ba-91d1-4403-ad3f-0a4e35be4059";
+
+    const vapi = new Vapi(VAPI_PUBLIC_KEY);
+
+    const btnStart  = document.getElementById("btn-start");
+    const btnEnd    = document.getElementById("btn-end");
+    const orbWrap   = document.getElementById("orb-wrap");
+    const waveform  = document.getElementById("waveform");
+    const statusLbl = document.getElementById("status-label");
+    const txWrap    = document.getElementById("transcript-wrap");
+    const txText    = document.getElementById("transcript-text");
+
+    let transcript = "";
+
+    function setStatus(msg, cls = "") {
+      statusLbl.textContent = msg;
+      statusLbl.className = "status-label " + cls;
+    }
+
+    function setActive(active) {
+      orbWrap.classList.toggle("active", active);
+      waveform.classList.toggle("visible", active);
+      btnEnd.classList.toggle("visible", active);
+      btnStart.disabled = active;
+    }
+
+    vapi.on("call-start", () => {
+      setActive(true);
+      setStatus("Connected · Listening…", "active");
+      txWrap.classList.add("visible");
+      txText.textContent = "";
+      transcript = "";
+    });
+
+    vapi.on("call-end", () => {
+      setActive(false);
+      setStatus("Call ended", "");
+    });
+
+    vapi.on("error", (err) => {
+      setActive(false);
+      setStatus("Error: " + (err?.message || "Unknown error"), "error");
+      console.error("Vapi error:", err);
+    });
+
+    vapi.on("speech-start", () => setStatus("Assistant speaking…", "active"));
+    vapi.on("speech-end",   () => setStatus("Listening…", "active"));
+
+    vapi.on("message", (msg) => {
+      if (msg?.type === "transcript" && msg?.transcript) {
+        const role = msg.role === "assistant" ? "🤖 " : "🎤 ";
+        transcript += role + msg.transcript + "\n";
+        txText.textContent = transcript;
+        txWrap.scrollTop = txWrap.scrollHeight;
+      }
+    });
+
+    btnStart.addEventListener("click", async () => {
+      btnStart.disabled = true;
+      setStatus("Connecting…");
+      try {
+        await vapi.start(VAPI_ASSISTANT_ID);
+      } catch (e) {
+        btnStart.disabled = false;
+        setStatus("Failed to connect", "error");
+        console.error(e);
+      }
+    });
+
+    btnEnd.addEventListener("click", () => {
+      vapi.stop();
+    });
+  </script>
+</body>
+</html>
