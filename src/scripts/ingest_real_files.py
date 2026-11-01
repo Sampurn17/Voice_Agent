@@ -145,8 +145,8 @@ def run_pipeline():
 
     print("\n2. Chunking documents with RecursiveCharacterTextSplitter...")
     splitter = RecursiveCharacterTextSplitter(
-        chunk_size=750,
-        chunk_overlap=100,
+        chunk_size=1000,  # Increased chunk size for better context
+        chunk_overlap=150,  # Increased overlap to preserve continuity
         separators=["\n\n", "\n", ". ", " "],
     )
     split_docs = splitter.split_documents(raw_docs)
@@ -187,7 +187,7 @@ def run_pipeline():
                     "id": f"doc_{uuid.uuid4().hex[:10]}",
                     "values": embs_list[j],
                     "metadata": {
-                        "text": d.page_content[:1500],
+                        "text": d.page_content[:2500],  # Store more text per chunk
                         "department": d.metadata.get("department", "General"),
                         "source_file": d.metadata.get("source_file", "unknown"),
                         "branch_title": d.metadata.get("branch_title", "General"),

@@ -67,7 +67,7 @@ class ConversationSessionManager:
         session_entry["history"].append(
             {
                 "query": query.strip(),
-                "response": (response or "").strip()[:500],  # keep concise snippet
+                "response": (response or "").strip()[:1500],  # keep more context for follow-ups
                 "timestamp": now,
             }
         )
@@ -93,8 +93,20 @@ class ConversationSessionManager:
         if not clean_query:
             return clean_query
 
+        # Enhance curriculum queries with explicit keywords
+        query_lower = clean_query.lower()
+        if any(word in query_lower for word in ['semester', 'curriculum', 'subjects', 'courses', 'syllabus']):
+            if 'ece' in query_lower or 'electronics' in query_lower or ' ec ' in query_lower or query_lower.endswith(' ec'):
+                clean_query += " Electronics and Communication Engineering course list subjects"
+            elif 'cse' in query_lower or 'computer science' in query_lower or ' cs ' in query_lower:
+                clean_query += " Computer Science Engineering course list subjects"
+            elif 'data science' in query_lower or ' ds ' in query_lower:
+                clean_query += " Data Science course list subjects"
+            elif 'cyber' in query_lower or 'security' in query_lower or ' cy ' in query_lower:
+                clean_query += " Cyber Security course list subjects"
+
         history = self.get_history(session_id)
-        # If no prior turns exist or no Cohere client available, return query as-is
+        # If no prior turns exist or no Cohere client available, return enhanced query
         if not history or not self.cohere_client:
             return clean_query
 

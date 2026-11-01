@@ -4,6 +4,17 @@ A conversational voice agent for **IIIT Una** that answers questions about fees,
 
 Built on FastAPI with a clean-architecture backend that also manages todos, reminders, calendar events, and outbound calls.
 
+## 🔥 Recent Updates
+
+**[November 2024] - Enhanced RAG Response Quality**
+- ✅ Fixed issue where calls would end prematurely for curriculum/PDF queries
+- ✅ Improved response comprehensiveness (no more 2-4 sentence limits)
+- ✅ Better chunking strategy (1000 chars with 150 char overlap)
+- ✅ Enhanced context retrieval (8 chunks, 8000 char context window)
+- ✅ Natural, conversational voice responses
+
+See [FIXES_APPLIED.md](FIXES_APPLIED.md) for detailed technical information.
+
 ---
 
 ## ✨ Features
